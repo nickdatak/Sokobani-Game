@@ -1,4 +1,4 @@
-public class Player extends GameObject {
+public class Player extends GameObject implements Movable{
 
     private int gridWidth;
     private int gridHeight;
@@ -10,11 +10,21 @@ public class Player extends GameObject {
     }
 
     @Override
+    public void move(int dx, int dy) {
+        Position pos = super.getPositionObject();
+        int newX = pos.getx() + dx;
+        int newY = pos.gety() + dy;
+        pos.setx(newX);
+        pos.sety(newY);
+    }
+
+    @Override
     public String getSymbol() {
         return ("P");
     }
 
     // Movement methods using inherited getPosition
+    //I genuinely have no idea why we still need this because we implemented general move method, but there is no harm in keeping them
     public void moveU() {
         int[] pos = getPosition();
         int newY = pos[1] - 1;
